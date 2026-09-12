@@ -1,11 +1,6 @@
 /* =========================================================
    SISTEMA CRIPTOGRÁFICO AL-KINDI
-   Hoja de estilos principal
-   ========================================================= */
-
-
-/* =========================================================
-   1. CONFIGURACIÓN GENERAL
+   Hoja de estilos principal — Edición Gótica Macabra & Terminal
    ========================================================= */
 
 * {
@@ -15,27 +10,34 @@
 }
 
 :root {
-    --fondo: #0b1020;
-    --fondo-secundario: #11182d;
-    --tarjeta: #151d35;
-    --tarjeta-hover: #19233f;
+    --fondo: #020203;
+    --fondo-secundario: #050507;
+    --tarjeta: #08080c;
+    --tarjeta-hover: #0c0c12;
 
-    --texto: #f2f5ff;
-    --texto-secundario: #aab4cc;
-    --texto-suave: #7f8aa5;
+    --texto: #d1d1dc;
+    --texto-secundario: #7a7a8c;
+    --texto-suave: #3d3d4d;
 
-    --principal: #5b8cff;
-    --principal-hover: #4778eb;
+    --principal: #660000;          /* Rojo sangre seco / macabro */
+    --principal-hover: #990000;
+    --principal-glow: rgba(102, 0, 0, 0.4);
 
-    --borde: #293451;
+    --borde: #14141a;              /* Delgado y sutil */
+    --borde-foco: #660000;
 
-    --exito: #42d392;
-    --advertencia: #f6c453;
+    --sombra-profunda: 
+        0 20px 50px rgba(0, 0, 0, 0.95),
+        inset 0 1px 0 rgba(255, 255, 255, 0.015);
 
-    --radio: 14px;
+    --radio: 2px;                  /* Geometría afilada / industrial */
+}
 
-    --sombra:
-        0 12px 35px rgba(0, 0, 0, 0.30);
+/* Animación de latido siniestro para inputs activos */
+@keyframes latido-siniestro {
+    0% { box-shadow: 0 0 4px rgba(102, 0, 0, 0.2), inset 0 0 5px rgba(0, 0, 0, 0.8); }
+    50% { box-shadow: 0 0 14px rgba(102, 0, 0, 0.5), inset 0 0 10px rgba(102, 0, 0, 0.2); }
+    100% { box-shadow: 0 0 4px rgba(102, 0, 0, 0.2), inset 0 0 5px rgba(0, 0, 0, 0.8); }
 }
 
 html {
@@ -44,26 +46,15 @@ html {
 
 body {
     min-height: 100vh;
-
-    font-family:
-        Inter,
-        "Segoe UI",
-        Roboto,
-        Arial,
-        sans-serif;
-
-    background:
-        radial-gradient(
-            circle at top,
-            #182448 0%,
-            var(--fondo) 45%
-        );
-
+    font-family: Inter, "Segoe UI", Roboto, monospace, sans-serif;
+    background-color: var(--fondo);
+    background-image: 
+        radial-gradient(circle at 50% -20%, rgba(45, 0, 0, 0.25) 0%, transparent 65%),
+        radial-gradient(circle at 50% 120%, rgba(2, 2, 4, 0.95) 0%, transparent 100%);
     color: var(--texto);
-
-    line-height: 1.6;
+    line-height: 1.7;
+    letter-spacing: 0.03em;
 }
-
 
 /* =========================================================
    2. ELEMENTOS GENERALES
@@ -80,33 +71,31 @@ button {
     cursor: pointer;
 }
 
-
-/* Contenedor central de la página */
-
 .contenedor {
-    width: min(
-        1100px,
-        calc(100% - 40px)
-    );
-
+    width: min(940px, calc(100% - 40px));
     margin: 0 auto;
 }
-
 
 /* =========================================================
    3. ENCABEZADO
    ========================================================= */
 
 .encabezado {
-    padding: 60px 0 45px;
+    padding: 70px 0 45px;
+    border-bottom: 1px solid var(--borde);
+    position: relative;
+}
 
-    border-bottom:
-        1px solid rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
+.encabezado::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 80px;
+    height: 1px;
+    background: var(--principal);
+    box-shadow: 0 0 8px var(--principal);
 }
 
 .encabezado .contenedor {
@@ -114,95 +103,81 @@ button {
 }
 
 .encabezado h1 {
-    font-size: clamp(
-        2rem,
-        5vw,
-        3.5rem
-    );
-
-    font-weight: 800;
-
-    letter-spacing: -0.04em;
-
-    background:
-        linear-gradient(
-            90deg,
-            #ffffff,
-            #8fb0ff
-        );
-
-    -webkit-background-clip: text;
-    background-clip: text;
-
-    color: transparent;
-
-    margin-bottom: 12px;
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: #ededf2;
+    margin-bottom: 10px;
+    text-shadow: 0 4px 15px rgba(0, 0, 0, 0.9);
 }
 
 .encabezado p {
-    max-width: 700px;
-
-    margin:
-        0 auto;
-
+    max-width: 600px;
+    margin: 0 auto;
     color: var(--texto-secundario);
-
-    font-size: 1.05rem;
+    font-size: 0.92rem;
+    letter-spacing: 0.04em;
 }
-
 
 /* =========================================================
    4. CONTENIDO PRINCIPAL
    ========================================================= */
 
 .principal {
-    padding: 35px 0 55px;
-
+    padding: 45px 0 75px;
     display: flex;
-
     flex-direction: column;
-
-    gap: 24px;
+    gap: 32px;
 }
 
-
 /* =========================================================
-   5. TARJETAS
+   5. TARJETAS (Profundidad y Capas Oscuras)
    ========================================================= */
 
 .tarjeta {
-    background:
-        linear-gradient(
-            145deg,
-            rgba(255, 255, 255, 0.035),
-            rgba(255, 255, 255, 0.015)
-        ),
-        var(--tarjeta);
-
-    border:
-        1px solid var(--borde);
-
+    background: var(--tarjeta);
+    border: 1px solid var(--borde);
     border-radius: var(--radio);
+    padding: 32px;
+    box-shadow: var(--sombra-profunda);
+    position: relative;
+    transition: border-color 0.4s ease, box-shadow 0.4s ease;
+}
 
-    padding: 28px;
+.tarjeta::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 2px;
+    height: 100%;
+    background: var(--borde);
+    transition: background 0.3s ease;
+}
 
-    box-shadow: var(--sombra);
+.tarjeta:hover {
+    border-color: #242430;
+}
+
+.tarjeta:hover::before {
+    background: var(--principal);
 }
 
 .tarjeta h2 {
-    font-size: 1.35rem;
-
-    margin-bottom: 7px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #e6e6f0;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
 }
 
 .descripcion {
     color: var(--texto-secundario);
-
     margin-bottom: 24px;
-
-    font-size: 0.95rem;
+    font-size: 0.85rem;
+    letter-spacing: 0.02em;
 }
-
 
 /* =========================================================
    6. GRUPOS DE FORMULARIO
@@ -210,12 +185,9 @@ button {
 
 .grupo {
     display: flex;
-
     flex-direction: column;
-
     gap: 8px;
-
-    margin-bottom: 20px;
+    margin-bottom: 22px;
 }
 
 .grupo:last-child {
@@ -223,91 +195,65 @@ button {
 }
 
 .grupo label {
-    font-weight: 600;
-
-    font-size: 0.95rem;
+    font-weight: 500;
+    font-size: 0.75rem;
+    color: var(--texto-secundario);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
 }
 
 .grupo small {
     color: var(--texto-suave);
-
-    font-size: 0.82rem;
+    font-size: 0.72rem;
+    letter-spacing: 0.02em;
 }
-
-
-/* Inputs y selects */
 
 .grupo select,
 .grupo input {
     width: 100%;
-
-    border:
-        1px solid var(--borde);
-
-    border-radius: 10px;
-
-    background:
-        var(--fondo-secundario);
-
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    /* Textura interna tipo terminal/scanline oscura */
+    background-color: var(--fondo-secundario);
+    background-image: 
+        linear-gradient(180deg, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.2) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(0, 0, 0, 0.2) 2px, rgba(0, 0, 0, 0.2) 4px);
     color: var(--texto);
-
-    padding:
-        12px 14px;
-
+    padding: 13px 16px;
     outline: none;
-
-    transition:
-        border-color 0.2s,
-        box-shadow 0.2s,
-        background 0.2s;
+    transition: all 0.3s ease;
+    font-size: 0.92rem;
 }
 
 .grupo select:focus,
 .grupo input:focus {
-    border-color:
-        var(--principal);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(
-            91,
-            140,
-            255,
-            0.15
-        );
+    border-color: var(--borde-foco);
+    animation: latido-siniestro 3s infinite ease-in-out;
+    background-color: #030305;
 }
 
-
 /* =========================================================
-   7. TEXTAREAS
+   7. TEXTAREAS (Textura de Consola Cifrada Profunda)
    ========================================================= */
 
 textarea {
     width: 100%;
-
-    min-height: 180px;
-
+    min-height: 170px;
     resize: vertical;
-
     padding: 16px;
-
-    border:
-        1px solid var(--borde);
-
-    border-radius: 12px;
-
-    background:
-        var(--fondo-secundario);
-
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    /* Textura turbia y profunda simulando terminal antigua */
+    background-color: var(--fondo-secundario);
+    background-image: 
+        linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.3) 100%),
+        repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(0, 0, 0, 0.25) 3px, rgba(0, 0, 0, 0.25) 6px);
     color: var(--texto);
-
     outline: none;
-
     line-height: 1.6;
-
-    transition:
-        border-color 0.2s,
-        box-shadow 0.2s;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.8);
 }
 
 textarea::placeholder {
@@ -315,19 +261,10 @@ textarea::placeholder {
 }
 
 textarea:focus {
-    border-color:
-        var(--principal);
-
-    box-shadow:
-        0 0 0 3px
-        rgba(
-            91,
-            140,
-            255,
-            0.15
-        );
+    border-color: var(--borde-foco);
+    animation: latido-siniestro 3s infinite ease-in-out;
+    background-color: #030305;
 }
-
 
 /* =========================================================
    8. ACCIONES / BOTONES
@@ -335,81 +272,54 @@ textarea:focus {
 
 .acciones {
     display: flex;
-
     gap: 12px;
-
     flex-wrap: wrap;
+    margin-top: 6px;
 }
 
 .boton {
     border: none;
-
-    border-radius: 10px;
-
-    padding:
-        13px 21px;
-
-    font-weight: 700;
-
-    transition:
-        transform 0.15s,
-        background 0.2s,
-        box-shadow 0.2s;
+    border-radius: var(--radio);
+    padding: 12px 24px;
+    font-weight: 600;
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .boton:hover {
-    transform:
-        translateY(-1px);
+    transform: translateY(-1px);
 }
 
 .boton:active {
-    transform:
-        translateY(0);
+    transform: translateY(0);
 }
 
-
 /* Botón principal */
-
 .boton-principal {
-    background:
-        var(--principal);
-
-    color: white;
-
-    box-shadow:
-        0 8px 20px
-        rgba(
-            91,
-            140,
-            255,
-            0.22
-        );
+    background: var(--principal);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(102, 0, 0, 0.4);
 }
 
 .boton-principal:hover {
-    background:
-        var(--principal-hover);
+    background: var(--principal-hover);
+    box-shadow: 0 6px 22px rgba(102, 0, 0, 0.6);
 }
 
-
 /* Botón secundario */
-
 .boton-secundario {
-    background:
-        #222c48;
-
-    color:
-        var(--texto);
-
-    border:
-        1px solid var(--borde);
+    background: #0a0a0f;
+    color: var(--texto-secundario);
+    border: 1px solid var(--borde);
 }
 
 .boton-secundario:hover {
-    background:
-        #2a3554;
+    background: #12121c;
+    color: var(--texto);
+    border-color: #2a2a38;
 }
-
 
 /* =========================================================
    9. RESULTADO
@@ -417,83 +327,44 @@ textarea:focus {
 
 .resultado {
     display: flex;
-
     flex-direction: column;
-
     gap: 22px;
 }
 
 .resultado-encabezado {
     display: flex;
-
     justify-content: space-between;
-
     align-items: center;
-
-    gap: 20px;
-
+    gap: 16px;
     flex-wrap: wrap;
 }
 
 .estado {
-    color:
-        var(--texto-secundario);
-
-    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    font-size: 0.8rem;
+    letter-spacing: 0.03em;
 }
-
-
-/* Etiqueta del método */
 
 .etiqueta {
     display: inline-flex;
-
     align-items: center;
-
     justify-content: center;
-
-    padding:
-        7px 12px;
-
-    border-radius: 999px;
-
-    background:
-        rgba(
-            91,
-            140,
-            255,
-            0.12
-        );
-
-    border:
-        1px solid
-        rgba(
-            91,
-            140,
-            255,
-            0.25
-        );
-
-    color:
-        #a9c0ff;
-
-    font-size: 0.85rem;
-
+    padding: 5px 12px;
+    border-radius: 2px;
+    background: rgba(102, 0, 0, 0.15);
+    border: 1px solid rgba(102, 0, 0, 0.4);
+    color: #ff4d4d;
+    font-size: 0.72rem;
     font-weight: 700;
-
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
     white-space: nowrap;
 }
 
-
-/* Área de resultado */
-
 .resultado-texto textarea {
-    min-height: 200px;
-
-    background:
-        #0d1529;
+    min-height: 180px;
+    background-color: #020204;
 }
-
 
 /* =========================================================
    10. INFORMACIÓN DEL RESULTADO
@@ -501,62 +372,33 @@ textarea:focus {
 
 .informacion-resultado {
     display: grid;
-
-    grid-template-columns:
-        repeat(
-            3,
-            minmax(
-                0,
-                1fr
-            )
-        );
-
+    grid-template-columns: repeat(3, minmax(0, 1fr));
     gap: 12px;
 }
 
 .dato {
     display: flex;
-
     flex-direction: column;
-
-    gap: 4px;
-
+    gap: 5px;
     padding: 15px;
-
-    border:
-        1px solid var(--borde);
-
-    border-radius: 10px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.02
-        );
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    background: rgba(255, 255, 255, 0.008);
 }
 
 .dato-titulo {
-    color:
-        var(--texto-suave);
-
-    font-size: 0.78rem;
-
+    color: var(--texto-suave);
+    font-size: 0.68rem;
     text-transform: uppercase;
-
-    letter-spacing: 0.05em;
+    letter-spacing: 0.14em;
 }
 
 .dato-valor {
-    color:
-        var(--texto);
-
-    font-weight: 600;
-
+    color: var(--texto);
+    font-weight: 500;
     word-break: break-word;
+    font-size: 0.92rem;
 }
-
 
 /* =========================================================
    11. INFORMACIÓN DEL ALGORITMO
@@ -564,121 +406,74 @@ textarea:focus {
 
 .informacion-grid {
     display: grid;
-
-    grid-template-columns:
-        repeat(
-            2,
-            minmax(
-                0,
-                1fr
-            )
-        );
-
+    grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
-
-    margin-top: 20px;
+    margin-top: 22px;
 }
 
 .informacion-grid article {
-    padding: 20px;
-
-    border:
-        1px solid var(--borde);
-
-    border-radius: 12px;
-
-    background:
-        rgba(
-            255,
-            255,
-            255,
-            0.02
-        );
-
-    transition:
-        background 0.2s,
-        transform 0.2s;
+    padding: 22px;
+    border: 1px solid var(--borde);
+    border-radius: var(--radio);
+    background: rgba(255, 255, 255, 0.008);
+    transition: all 0.3s ease;
 }
 
 .informacion-grid article:hover {
-    background:
-        var(--tarjeta-hover);
-
-    transform:
-        translateY(-2px);
+    background: var(--tarjeta-hover);
+    border-color: #2a2a38;
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.6);
 }
 
 .informacion-grid h3 {
-    margin-bottom: 7px;
-
-    font-size: 1rem;
+    margin-bottom: 6px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: #e2e2ec;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
 }
 
 .informacion-grid p {
-    color:
-        var(--texto-secundario);
-
-    font-size: 0.9rem;
+    color: var(--texto-secundario);
+    font-size: 0.82rem;
 }
 
-
 /* =========================================================
-   12. PIE DE PÁGINA
+   12. PIE DE PÁGINA (Estilo Copyright / Registro Clasificado)
    ========================================================= */
 
 .pie {
-    padding:
-        25px 20px 35px;
-
+    padding: 35px 20px 45px;
     text-align: center;
-
-    border-top:
-        1px solid rgba(
-            255,
-            255,
-            255,
-            0.06
-        );
-
-    color:
-        var(--texto-suave);
-
-    font-size: 0.85rem;
+    border-top: 1px solid var(--borde);
+    color: var(--texto-suave);
+    font-size: 0.72rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
 }
-
 
 /* =========================================================
    13. DISEÑO RESPONSIVO
    ========================================================= */
 
 @media (max-width: 750px) {
-
     .contenedor {
-        width:
-            min(
-                100% - 24px,
-                1100px
-            );
+        width: min(100% - 24px, 940px);
     }
 
     .encabezado {
-        padding:
-            45px 0 35px;
+        padding: 45px 0 30px;
     }
 
     .tarjeta {
-        padding:
-            21px;
+        padding: 20px;
     }
 
-    .informacion-grid {
-        grid-template-columns:
-            1fr;
-    }
-
+    .informacion-grid,
     .informacion-resultado {
-        grid-template-columns:
-            1fr;
+        grid-template-columns: 1fr;
     }
 
     .acciones {
@@ -687,20 +482,15 @@ textarea:focus {
 
     .boton {
         width: 100%;
-    }
-
-    textarea {
-        min-height: 160px;
+        text-align: center;
     }
 }
-
 
 /* =========================================================
    14. REDUCCIÓN DE ANIMACIONES
    ========================================================= */
 
 @media (prefers-reduced-motion: reduce) {
-
     html {
         scroll-behavior: auto;
     }
