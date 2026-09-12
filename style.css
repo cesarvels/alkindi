@@ -1,0 +1,714 @@
+/* =========================================================
+   SISTEMA CRIPTOGRÁFICO AL-KINDI
+   Hoja de estilos principal
+   ========================================================= */
+
+
+/* =========================================================
+   1. CONFIGURACIÓN GENERAL
+   ========================================================= */
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+:root {
+    --fondo: #0b1020;
+    --fondo-secundario: #11182d;
+    --tarjeta: #151d35;
+    --tarjeta-hover: #19233f;
+
+    --texto: #f2f5ff;
+    --texto-secundario: #aab4cc;
+    --texto-suave: #7f8aa5;
+
+    --principal: #5b8cff;
+    --principal-hover: #4778eb;
+
+    --borde: #293451;
+
+    --exito: #42d392;
+    --advertencia: #f6c453;
+
+    --radio: 14px;
+
+    --sombra:
+        0 12px 35px rgba(0, 0, 0, 0.30);
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+
+    font-family:
+        Inter,
+        "Segoe UI",
+        Roboto,
+        Arial,
+        sans-serif;
+
+    background:
+        radial-gradient(
+            circle at top,
+            #182448 0%,
+            var(--fondo) 45%
+        );
+
+    color: var(--texto);
+
+    line-height: 1.6;
+}
+
+
+/* =========================================================
+   2. ELEMENTOS GENERALES
+   ========================================================= */
+
+button,
+input,
+select,
+textarea {
+    font: inherit;
+}
+
+button {
+    cursor: pointer;
+}
+
+
+/* Contenedor central de la página */
+
+.contenedor {
+    width: min(
+        1100px,
+        calc(100% - 40px)
+    );
+
+    margin: 0 auto;
+}
+
+
+/* =========================================================
+   3. ENCABEZADO
+   ========================================================= */
+
+.encabezado {
+    padding: 60px 0 45px;
+
+    border-bottom:
+        1px solid rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
+}
+
+.encabezado .contenedor {
+    text-align: center;
+}
+
+.encabezado h1 {
+    font-size: clamp(
+        2rem,
+        5vw,
+        3.5rem
+    );
+
+    font-weight: 800;
+
+    letter-spacing: -0.04em;
+
+    background:
+        linear-gradient(
+            90deg,
+            #ffffff,
+            #8fb0ff
+        );
+
+    -webkit-background-clip: text;
+    background-clip: text;
+
+    color: transparent;
+
+    margin-bottom: 12px;
+}
+
+.encabezado p {
+    max-width: 700px;
+
+    margin:
+        0 auto;
+
+    color: var(--texto-secundario);
+
+    font-size: 1.05rem;
+}
+
+
+/* =========================================================
+   4. CONTENIDO PRINCIPAL
+   ========================================================= */
+
+.principal {
+    padding: 35px 0 55px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+
+/* =========================================================
+   5. TARJETAS
+   ========================================================= */
+
+.tarjeta {
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.035),
+            rgba(255, 255, 255, 0.015)
+        ),
+        var(--tarjeta);
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: var(--radio);
+
+    padding: 28px;
+
+    box-shadow: var(--sombra);
+}
+
+.tarjeta h2 {
+    font-size: 1.35rem;
+
+    margin-bottom: 7px;
+}
+
+.descripcion {
+    color: var(--texto-secundario);
+
+    margin-bottom: 24px;
+
+    font-size: 0.95rem;
+}
+
+
+/* =========================================================
+   6. GRUPOS DE FORMULARIO
+   ========================================================= */
+
+.grupo {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+
+    margin-bottom: 20px;
+}
+
+.grupo:last-child {
+    margin-bottom: 0;
+}
+
+.grupo label {
+    font-weight: 600;
+
+    font-size: 0.95rem;
+}
+
+.grupo small {
+    color: var(--texto-suave);
+
+    font-size: 0.82rem;
+}
+
+
+/* Inputs y selects */
+
+.grupo select,
+.grupo input {
+    width: 100%;
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 10px;
+
+    background:
+        var(--fondo-secundario);
+
+    color: var(--texto);
+
+    padding:
+        12px 14px;
+
+    outline: none;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s,
+        background 0.2s;
+}
+
+.grupo select:focus,
+.grupo input:focus {
+    border-color:
+        var(--principal);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            91,
+            140,
+            255,
+            0.15
+        );
+}
+
+
+/* =========================================================
+   7. TEXTAREAS
+   ========================================================= */
+
+textarea {
+    width: 100%;
+
+    min-height: 180px;
+
+    resize: vertical;
+
+    padding: 16px;
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 12px;
+
+    background:
+        var(--fondo-secundario);
+
+    color: var(--texto);
+
+    outline: none;
+
+    line-height: 1.6;
+
+    transition:
+        border-color 0.2s,
+        box-shadow 0.2s;
+}
+
+textarea::placeholder {
+    color: var(--texto-suave);
+}
+
+textarea:focus {
+    border-color:
+        var(--principal);
+
+    box-shadow:
+        0 0 0 3px
+        rgba(
+            91,
+            140,
+            255,
+            0.15
+        );
+}
+
+
+/* =========================================================
+   8. ACCIONES / BOTONES
+   ========================================================= */
+
+.acciones {
+    display: flex;
+
+    gap: 12px;
+
+    flex-wrap: wrap;
+}
+
+.boton {
+    border: none;
+
+    border-radius: 10px;
+
+    padding:
+        13px 21px;
+
+    font-weight: 700;
+
+    transition:
+        transform 0.15s,
+        background 0.2s,
+        box-shadow 0.2s;
+}
+
+.boton:hover {
+    transform:
+        translateY(-1px);
+}
+
+.boton:active {
+    transform:
+        translateY(0);
+}
+
+
+/* Botón principal */
+
+.boton-principal {
+    background:
+        var(--principal);
+
+    color: white;
+
+    box-shadow:
+        0 8px 20px
+        rgba(
+            91,
+            140,
+            255,
+            0.22
+        );
+}
+
+.boton-principal:hover {
+    background:
+        var(--principal-hover);
+}
+
+
+/* Botón secundario */
+
+.boton-secundario {
+    background:
+        #222c48;
+
+    color:
+        var(--texto);
+
+    border:
+        1px solid var(--borde);
+}
+
+.boton-secundario:hover {
+    background:
+        #2a3554;
+}
+
+
+/* =========================================================
+   9. RESULTADO
+   ========================================================= */
+
+.resultado {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 22px;
+}
+
+.resultado-encabezado {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    flex-wrap: wrap;
+}
+
+.estado {
+    color:
+        var(--texto-secundario);
+
+    font-size: 0.9rem;
+}
+
+
+/* Etiqueta del método */
+
+.etiqueta {
+    display: inline-flex;
+
+    align-items: center;
+
+    justify-content: center;
+
+    padding:
+        7px 12px;
+
+    border-radius: 999px;
+
+    background:
+        rgba(
+            91,
+            140,
+            255,
+            0.12
+        );
+
+    border:
+        1px solid
+        rgba(
+            91,
+            140,
+            255,
+            0.25
+        );
+
+    color:
+        #a9c0ff;
+
+    font-size: 0.85rem;
+
+    font-weight: 700;
+
+    white-space: nowrap;
+}
+
+
+/* Área de resultado */
+
+.resultado-texto textarea {
+    min-height: 200px;
+
+    background:
+        #0d1529;
+}
+
+
+/* =========================================================
+   10. INFORMACIÓN DEL RESULTADO
+   ========================================================= */
+
+.informacion-resultado {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            3,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 12px;
+}
+
+.dato {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 4px;
+
+    padding: 15px;
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 10px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.02
+        );
+}
+
+.dato-titulo {
+    color:
+        var(--texto-suave);
+
+    font-size: 0.78rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.05em;
+}
+
+.dato-valor {
+    color:
+        var(--texto);
+
+    font-weight: 600;
+
+    word-break: break-word;
+}
+
+
+/* =========================================================
+   11. INFORMACIÓN DEL ALGORITMO
+   ========================================================= */
+
+.informacion-grid {
+    display: grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(
+                0,
+                1fr
+            )
+        );
+
+    gap: 16px;
+
+    margin-top: 20px;
+}
+
+.informacion-grid article {
+    padding: 20px;
+
+    border:
+        1px solid var(--borde);
+
+    border-radius: 12px;
+
+    background:
+        rgba(
+            255,
+            255,
+            255,
+            0.02
+        );
+
+    transition:
+        background 0.2s,
+        transform 0.2s;
+}
+
+.informacion-grid article:hover {
+    background:
+        var(--tarjeta-hover);
+
+    transform:
+        translateY(-2px);
+}
+
+.informacion-grid h3 {
+    margin-bottom: 7px;
+
+    font-size: 1rem;
+}
+
+.informacion-grid p {
+    color:
+        var(--texto-secundario);
+
+    font-size: 0.9rem;
+}
+
+
+/* =========================================================
+   12. PIE DE PÁGINA
+   ========================================================= */
+
+.pie {
+    padding:
+        25px 20px 35px;
+
+    text-align: center;
+
+    border-top:
+        1px solid rgba(
+            255,
+            255,
+            255,
+            0.06
+        );
+
+    color:
+        var(--texto-suave);
+
+    font-size: 0.85rem;
+}
+
+
+/* =========================================================
+   13. DISEÑO RESPONSIVO
+   ========================================================= */
+
+@media (max-width: 750px) {
+
+    .contenedor {
+        width:
+            min(
+                100% - 24px,
+                1100px
+            );
+    }
+
+    .encabezado {
+        padding:
+            45px 0 35px;
+    }
+
+    .tarjeta {
+        padding:
+            21px;
+    }
+
+    .informacion-grid {
+        grid-template-columns:
+            1fr;
+    }
+
+    .informacion-resultado {
+        grid-template-columns:
+            1fr;
+    }
+
+    .acciones {
+        flex-direction: column;
+    }
+
+    .boton {
+        width: 100%;
+    }
+
+    textarea {
+        min-height: 160px;
+    }
+}
+
+
+/* =========================================================
+   14. REDUCCIÓN DE ANIMACIONES
+   ========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    html {
+        scroll-behavior: auto;
+    }
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}

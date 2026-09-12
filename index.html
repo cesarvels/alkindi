@@ -1,0 +1,452 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+
+    <!-- Hace que la interfaz se adapte correctamente a celulares y PC -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Sistema Criptográfico Al-Kindi</title>
+
+    <!-- Hoja de estilos -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <!-- ==========================================
+         ENCABEZADO PRINCIPAL
+         ========================================== -->
+
+    <header class="encabezado">
+
+        <div class="contenedor">
+
+            <h1>Sistema Criptográfico Al-Kindi</h1>
+
+            <p>
+                Cifrado y descifrado automático mediante
+                César y Atbash utilizando como base ASCII
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- ==========================================
+         CONTENIDO PRINCIPAL
+         ========================================== -->
+
+    <main class="contenedor principal">
+
+        <!-- ======================================
+             SECCIÓN DE CONFIGURACIÓN
+             ====================================== -->
+
+        <section class="tarjeta">
+
+            <h2>Configuración</h2>
+
+            <p class="descripcion">
+                Selecciona el modo de operación y configura
+                los parámetros del sistema.
+            </p>
+
+            <div class="grupo">
+
+                <label for="modo">
+                    Modo de operación
+                </label>
+
+                <select id="modo">
+
+                    <option value="cifrar">
+                        Cifrar oración
+                    </option>
+
+                    <option value="descifrar">
+                        Descifrar oración
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <div class="grupo">
+
+                <label for="metodo">
+                    Método de cifrado
+                </label>
+
+                <select id="metodo">
+
+                    <option value="cesar">
+                        César
+                    </option>
+
+                    <option value="atbash">
+                        Atbash
+                    </option>
+
+                    <option value="automatico">
+                        Detección automática
+                    </option>
+
+                </select>
+
+            </div>
+
+
+            <!-- ==================================
+                 DESPLAZAMIENTO DE CÉSAR
+                 ================================== -->
+
+            <div
+                class="grupo"
+                id="grupo-desplazamiento"
+            >
+
+                <label for="desplazamiento">
+
+                    Desplazamiento de César
+
+                </label>
+
+                <input
+                    type="number"
+                    id="desplazamiento"
+                    value="3"
+                    min="-1000"
+                    max="1000"
+                >
+
+                <small>
+
+                    Se utiliza únicamente con el método
+                    César durante el cifrado.
+
+                </small>
+
+            </div>
+
+        </section>
+
+        <!-- ======================================
+             ALFABETO DEL SISTEMA
+             ====================================== -->
+
+        <section class="tarjeta">
+
+            <h2>Alfabeto de trabajo</h2>
+
+            <p class="descripcion">
+
+                El sistema utiliza por defecto los caracteres
+                ASCII imprimibles. También permite ampliar o
+                sustituir el conjunto de caracteres utilizado
+                para el cifrado y descifrado.
+
+            </p>
+
+            <div class="grupo">
+
+                <label for="alfabeto">
+
+                    Caracteres del alfabeto
+
+                </label>
+
+                <textarea
+                    id="alfabeto"
+                    class="campo-alfabeto"
+                    spellcheck="false"
+                ></textarea>
+
+                <small>
+
+                    Cada carácter debe aparecer una sola vez.
+                    Puedes incluir letras, números, espacios,
+                    símbolos y otros caracteres Unicode.
+
+                </small>
+
+            </div>
+
+            <div class="acciones">
+
+                <button
+                    id="btn-restaurar-alfabeto"
+                    class="boton boton-secundario"
+                    type="button"
+                >
+
+                    Restaurar ASCII
+
+                </button>
+
+            </div>
+
+        </section>
+        <!-- ======================================
+             SECCIÓN DE ENTRADA
+             ====================================== -->
+
+        <section class="tarjeta">
+
+            <h2>Texto de entrada</h2>
+
+            <p class="descripcion">
+
+                Introduce la oración que deseas cifrar
+                o descifrar.
+
+            </p>
+
+            <textarea
+                id="texto-entrada"
+                placeholder="Escribe o pega aquí la oración..."
+                spellcheck="false"
+            ></textarea>
+
+        </section>
+
+
+        <!-- ======================================
+             BOTONES DE EJECUCIÓN
+             ====================================== -->
+
+        <section class="acciones">
+
+            <button
+                id="btn-ejecutar"
+                class="boton boton-principal"
+            >
+
+                Ejecutar operación
+
+            </button>
+
+
+            <button
+                id="btn-limpiar"
+                class="boton boton-secundario"
+            >
+
+                Limpiar
+
+            </button>
+
+        </section>
+
+
+        <!-- ======================================
+             RESULTADOS
+             ====================================== -->
+
+        <section
+            class="tarjeta resultado"
+            id="seccion-resultado"
+        >
+
+            <div class="resultado-encabezado">
+
+                <div>
+
+                    <h2>Resultado</h2>
+
+                    <p
+                        id="estado"
+                        class="estado"
+                    >
+
+                        Esperando una operación...
+
+                    </p>
+
+                </div>
+
+                <span
+                    id="metodo-detectado"
+                    class="etiqueta"
+                >
+
+                    Sin analizar
+
+                </span>
+
+            </div>
+
+
+            <!-- Texto resultante -->
+
+            <div class="resultado-texto">
+
+                <textarea
+                    id="texto-resultado"
+                    readonly
+                    placeholder="Aquí aparecerá el resultado..."
+                ></textarea>
+
+            </div>
+
+
+            <!-- Información adicional -->
+
+            <div
+                class="informacion-resultado"
+                id="informacion-resultado"
+            >
+
+                <div class="dato">
+
+                    <span class="dato-titulo">
+                        Método
+                    </span>
+
+                    <span
+                        id="resultado-metodo"
+                        class="dato-valor"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <span class="dato-titulo">
+                        Desplazamiento
+                    </span>
+
+                    <span
+                        id="resultado-desplazamiento"
+                        class="dato-valor"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+
+                <div class="dato">
+
+                    <span class="dato-titulo">
+                        Análisis
+                    </span>
+
+                    <span
+                        id="resultado-analisis"
+                        class="dato-valor"
+                    >
+                        —
+                    </span>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- ======================================
+             INFORMACIÓN DEL ALGORITMO
+             ====================================== -->
+
+        <section class="tarjeta informacion">
+
+            <h2>Funcionamiento del sistema</h2>
+
+            <div class="informacion-grid">
+
+                <article>
+
+                    <h3>César</h3>
+
+                    <p>
+
+                        Desplaza cada carácter del texto dentro
+                        del alfabeto definido por el sistema.
+                        Durante el proceso automático se prueban
+                        todas las rotaciones posibles.
+
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <h3>Atbash</h3>
+
+                    <p>
+
+                        Sustituye cada carácter por su equivalente
+                        en posición inversa dentro del alfabeto.
+
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <h3>Al-Kindi</h3>
+
+                    <p>
+
+                        El sistema compara las diferentes
+                        posibilidades mediante análisis
+                        estadístico y lingüístico para determinar
+                        cuál presenta mayor probabilidad de ser
+                        una oración válida en español.
+
+                    </p>
+
+                </article>
+
+
+                <article>
+
+                    <h3>ASCII</h3>
+
+                    <p>
+
+                        El sistema utiliza los valores numéricos
+                        de los caracteres como fundamento para
+                        realizar las operaciones de desplazamiento.
+
+                    </p>
+
+                </article>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- ==========================================
+         PIE DE PÁGINA
+         ========================================== -->
+
+    <footer class="pie">
+
+        <p>
+            Proyecto de Criptografía —
+            Métodos César y Atbash
+        </p>
+
+    </footer>
+
+
+    <!-- ==========================================
+         JAVASCRIPT
+         ========================================== -->
+
+<script src="script.min.js"></script>
+</body>
+</html>
